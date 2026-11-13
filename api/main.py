@@ -39,6 +39,13 @@ def init_db():
             user_id INTEGER PRIMARY KEY REFERENCES users(id),
             state_json TEXT NOT NULL DEFAULT '{}',
             updated_at TEXT NOT NULL)""")
+        c.execute("""CREATE TABLE IF NOT EXISTS leads(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL,
+            name TEXT NOT NULL DEFAULT '',
+            source TEXT NOT NULL DEFAULT 'cohort',
+            note TEXT NOT NULL DEFAULT '',
+            created_at TEXT NOT NULL)""")
 
 init_db()
 
@@ -117,6 +124,25 @@ def put_progress(request: Request, state: dict):
                ON CONFLICT(user_id) DO UPDATE SET state_json=excluded.state_json, updated_at=excluded.updated_at""",
             (u["id"], json.dumps(state, ensure_ascii=False), datetime.now(timezone.utc).isoformat()))
     return {"ok": True}
+
+class LeadIn(BaseModel):
+    email: EmailStr
+    name: str = Field(default="", max_length=60)
+    note: str = Field(default="", max_length=500)
+
+@app.post("/api/leads")
+def add_lead(body: LeadIn):
+    with db() as c:
+        c.execute("INSERT INTO leads(email,name,source,note,created_at) VALUES(?,?,?,?,?)",
+                  (body.email.lower().strip(), body.name.strip(), "cohort1", body.note.strip(),
+                   datetime.now(timezone.utc).isoformat()))
+    return {"ok": True}
+
+@app.get("/api/leads/count")
+def lead_count():
+    with db() as c:
+        return {"count": c.execute("SELECT COUNT(*) n FROM leads").fetchone()["n"]}
+
 
 @app.get("/api/health")
 def health():
