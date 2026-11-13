@@ -1,0 +1,88 @@
+import type { QuizSet } from "../types";
+
+export const arrangementQuiz: QuizSet = {
+  id: "arrangement",
+  titleZh: "編曲基礎 — 互動練習",
+  descriptionZh: "Drum / Bass Pattern 辨認與鼓組角色配對（對應 Series 05A App Practice）。",
+  items: [
+    {
+      id: "a1",
+      kind: "matching",
+      promptZh: "配對鼓組部件與其角色：",
+      pairs: [
+        { leftZh: "Kick", rightZh: "低頻脈衝，標記節奏骨架" },
+        { leftZh: "Snare", rightZh: "反拍骨幹（2 & 4）" },
+        { leftZh: "Hi-hat", rightZh: "維持細分律動" },
+        { leftZh: "Crash Cymbal", rightZh: "標記段落開始／高潮" },
+      ],
+    },
+    {
+      id: "a2",
+      kind: "mcq",
+      promptZh: "Basic Pop Pattern 中，Snare 通常落在哪些拍？",
+      options: ["1 和 3", "2 和 4", "每一拍", "只在第 4 拍"],
+      answerIndex: 1,
+      explanationZh: "流行鼓的經典骨架：Kick 在 1、3，Snare 在 2、4（反拍），Hi-hat 維持八分音符。",
+    },
+    {
+      id: "a3",
+      kind: "audio-mcq",
+      promptZh: "聆聽鼓組節奏 — Snare 落在哪些 16-step 位置？（1-based）",
+      audio: { type: "rhythm", bpm: 100, steps: [0, 4, 8, 12], beatsPerBar: 4 },
+      options: ["1 和 3", "2 和 4", "每拍都有", "無法判斷"],
+      answerIndex: 1,
+      explanationZh: "步驟 0、8 是拍 1、3（Kick），步驟 4、12 是拍 2、4（Snare 反拍位置）。",
+    },
+    {
+      id: "a4",
+      kind: "mcq",
+      promptZh: "Funk 鼓節奏的典型特徵是：",
+      options: [
+        "只用四分音符",
+        "16 分 Hi-hat、幽靈音（ghost notes）與切分",
+        "完全不用 Hi-hat",
+        "Snare 只在第 1 拍",
+      ],
+      answerIndex: 1,
+      explanationZh: "Funk 的能量來自高密度細分、隱藏在反拍的幽靈音，以及大量切分空拍。",
+    },
+    {
+      id: "a5",
+      kind: "mcq",
+      promptZh: "編寫 Bass 時，強拍最安全的音符選擇是：",
+      options: ["任意音", "和弦根音（Root）", "9 度音", "鼓的 Hi-hat 同音"],
+      answerIndex: 1,
+      explanationZh: "Root Notes 是 Bass 的地基：強拍彈根音確立和聲，過渡時才使用和弦音或趨近音。",
+    },
+    {
+      id: "a6",
+      kind: "mcq",
+      promptZh: "關於 Bass 與 Kick 的關係，以下何者正確？",
+      options: [
+        "兩者必須永遠同時發聲",
+        "兩者共享低頻空間，要麼同時增強衝擊，要麼互相錯開保持清晰",
+        "Bass 必須比 Kick 大聲 6 dB",
+        "Kick 只能出現在小節第一拍",
+      ],
+      answerIndex: 1,
+      explanationZh: "低頻空間有限：同步 = 衝擊感；錯開 = 清晰度。這是編曲與混音共同面對的核心取捨。",
+    },
+    {
+      id: "a7",
+      kind: "mcq",
+      promptZh: "Drum Fill（過門）最常出現的位置是：",
+      options: ["小節第 1 拍", "小節最後 1–2 拍，引導進入下一段落", "歌曲中間任意位置", "副歌中間"],
+      answerIndex: 1,
+      explanationZh: "Fill 佔據小節尾段作為「轉場訊號」— 簡短有力比複雜炫技更有效。",
+    },
+    {
+      id: "a8",
+      kind: "audio-mcq",
+      promptZh: "聆聽節奏 — 它整體感覺是直拍（Straight）還是搖擺（Swing）？",
+      audio: { type: "straightVsSwing", bpm: 110, swing: false },
+      options: ["Straight", "Swing"],
+      answerIndex: 0,
+      explanationZh: "八分音符平均 → Straight，常見於 Pop/Rock；Rock Groove 通常建立在直拍骨架上。",
+    },
+  ],
+};
